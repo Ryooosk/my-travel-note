@@ -4,204 +4,125 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>My Travel Notes</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      
       <main>
-        <h1 className="title">
-          ようこそ <a href="https://nextjs.org">test!</a>
-        </h1>
-
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <header>
+          <div class="title">
+            <h1>僕の旅行記</h1>
+          </div>
+        </header>
+        <div class="list">
+          <ul>
+            <li>北海道</li>
+            <li>青森県</li>
+            <li>岩手県</li>
+            <li>宮城県</li>
+            <li>秋田県</li>
+            <li>山形県</li>
+            <li>福島県</li>
+            <li>茨城県</li>
+            <li>栃木県</li>
+            <li>群馬県</li>
+            <li>埼玉県</li>
+            <li>千葉県</li>
+            <li>東京都</li>
+            <li>神奈川県</li>
+            <li>新潟県</li>
+            <li>富山県</li>
+            <li>石川県</li>
+            <li>福井県</li>
+            <li>山梨県</li>
+            <li>長野県</li>
+            <li>岐阜県</li>
+            <li>静岡県</li>
+            <li>愛知県</li>
+            <li>三重県</li>
+            <li>滋賀県</li>
+            <li>京都府</li>
+            <li>大阪府</li>
+            <li>兵庫県</li>
+            <li>奈良県</li>
+            <li>和歌山県</li>
+            <li>鳥取県</li>
+            <li>島根県</li>
+            <li>岡山県</li>
+            <li>広島県</li>
+            <li>山口県</li>
+            <li>徳島県</li>
+            <li>香川県</li>
+            <li>愛媛県</li>
+            <li>高知県</li>
+            <li>福岡県</li>
+            <li>佐賀県</li>
+            <li>長崎県</li>
+            <li>熊本県</li>
+            <li>大分県</li>
+            <li>宮崎県</li>
+            <li>鹿児島県</li>
+            <li>沖縄県</li>
+          </ul>
         </div>
       </main>
 
       <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className="logo" />
-        </a>
+        <div class="footer-list">
+          <ul>
+            <li>
+              <a href="https://www.twitter/suke3san2001">Twitter</a>
+            </li>
+            <li>
+              <a href="https://www.instgram/tbs_ksp_3">Instagram</a>
+            </li>
+          </ul>
+        </div>
+        
+        
       </footer>
 
       <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
         main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          background-color: #faebd7;
+          padding-top: 5px;
+          padding-bottom: 5px; 
         }
 
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+        header {
+          height: 60px;
         }
 
-        footer img {
-          margin-left: 0.5rem;
+        main ul {
+          column-count: 5;
+          color: #668ad8;
+          border: dashed 2px #668ad8;
+          background: #f1f8ff;
+          padding: 0.5em 0.5em 0.5em 2em;
+          margin: 50px;
+        }
+        
+        main ul li {
+          line-height: 1.5;
+          padding: 0.5em 0;
         }
 
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
+        header h1{
+          font-size: 40px;
           text-align: center;
         }
 
-        .description {
+        footer {
+          height: 100px;
+          background-color: #696969;
+          font-size: 15px;
+          padding: 5px 0;
+        }
+
+        footer ul li {
+          list-style: none;
           line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
+          padding-top: 10px;
         }
       `}</style>
     </div>
