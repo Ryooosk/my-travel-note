@@ -69,7 +69,7 @@ export default function Home() {
                     <ModalCloseButton />
                     <ModalBody>
                       
-                      きれいでした
+                      きれい
                     </ModalBody>
 
                     <ModalFooter>
