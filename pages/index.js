@@ -58,7 +58,7 @@ export default function Home() {
             <h1>僕の旅行記</h1>
           </div>
         </header>
-        <div class="list">
+        <div className="list">
           <ul>
             <li>
               <Button onClick={onOpen}>北海道</Button>
@@ -132,7 +132,7 @@ export default function Home() {
       </main>
 
       <footer>
-        <div class="footer-list">
+        <div className="footer-list">
           <ul>
             <li>
               <a href="https://twitter.com/suke3san2001">Twitter</a>
