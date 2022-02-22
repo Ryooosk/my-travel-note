@@ -11,7 +11,6 @@ import {
   ModalCloseButton,
   useDisclosure,
   Button,
-  Lorem,
 } from '@chakra-ui/react'
 
 const BasicUsage = () => {
@@ -26,7 +25,7 @@ const BasicUsage = () => {
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Lorem count={2} />
+            aiueo
           </ModalBody>
 
           <ModalFooter>
@@ -41,16 +40,19 @@ const BasicUsage = () => {
   )
 }
 
+
+
 export default function Home() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <div className="container">
+
       <Head>
         <title>My Travel Notes</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
       <main>
-        <BasicUsage></BasicUsage>
         <header>
           <div class="title">
             <h1>僕の旅行記</h1>
@@ -58,7 +60,27 @@ export default function Home() {
         </header>
         <div class="list">
           <ul>
-            <li>北海道</li>
+            <li>
+              <Button onClick={onOpen}>北海道</Button>
+                <Modal isOpen={isOpen} onClose={onClose}>
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>北海道</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      
+                      きれいでした
+                    </ModalBody>
+
+                    <ModalFooter>
+                      <Button colorScheme='blue' mr={3} onClick={onClose}>
+                        Close
+                      </Button>
+                      <Button variant='ghost'>Secondary Action</Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
+            </li>
             <li>青森県</li>
             <li>岩手県</li>
             <li>宮城県</li>
@@ -113,10 +135,10 @@ export default function Home() {
         <div class="footer-list">
           <ul>
             <li>
-              <a href="https://www.twitter/suke3san2001">Twitter</a>
+              <a href="https://twitter.com/suke3san2001">Twitter</a>
             </li>
             <li>
-              <a href="https://www.instgram/tbs_ksp_3">Instagram</a>
+              <a href="https://www.instagram.com/tbs_ksp_3/">Instagram</a>
             </li>
           </ul>
         </div>
