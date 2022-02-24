@@ -13,8 +13,28 @@ import {
   Button,
 } from '@chakra-ui/react'
 
-const BasicUsage = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getFirestore, collection, getDocs, doc } from 'firebase/firestore';
+import { useEffect } from 'react/cjs/react.production.min';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCAgG8T8_Bd0Z2ryyhPAsfxqVML25-vswc",
+  authDomain: "project-photo-f1ae2.firebaseapp.com",
+  projectId: "project-photo-f1ae2",
+  storageBucket: "project-photo-f1ae2.appspot.com",
+  messagingSenderId: "903517776237",
+  appId: "1:903517776237:web:9e460787a0c8816e72d264",
+  measurementId: "G-WQKLWNZ32S"
+};
+
+const app = initializeApp(firebaseConfig);
+const doAnalytics = () => getAnalytics(app);
+const db = getFirestore(app);
+
+//モーダル
+function BasicUsage() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
@@ -37,96 +57,90 @@ const BasicUsage = () => {
         </ModalContent>
       </Modal>
     </>
-  )
+  );
 }
+
+// const photoListModal = (props) => {
+//   const { isOpen, onOpen, onClose } = useDisclosure()
+//   const { area } = props;
+
+//   const [photoList, setPhotoList] = useState([]);
+  
+
+
+//   useEffect(async () => {
+
+//     const queryPhoto = async() => {
+//       await getDocs(collection(db, "photos"));
+//     };
+//     const set = queryPhoto.doc.map((area) => {
+//       return doc.data()
+//     });
+
+//     setPhotoList(set);
+    
+//     }, []);
+    
+
+//   return (
+//     <>
+//     <Button className="title" onClick={onOpen}>{area}</Button>
+//     <Modal isOpen={isOpen} onClose={onClose}>
+      
+//       <ModalOverlay />
+//       <ModalContent>
+//         <ModalHeader>
+          
+//         </ModalHeader>
+//         <ModalCloseButton />
+//         <ModalBody>
+          
+          
+//         </ModalBody>
+
+//         <ModalFooter>
+//           <Button colorScheme='blue' mr={3} onClick={onClose}>
+//             Close
+//           </Button>
+//         </ModalFooter>
+//       </ModalContent>
+//     </Modal>  
+//     </>
+//   );
+// }
 
 
 
 export default function Home() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const areaList = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"];
+
+  React.useEffect(() => {
+    doAnalytics();
+  }, []);
+
   return (
-    <div className="container">
+    <div className="body">
 
       <Head>
         <title>My Travel Notes</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico"/>
       </Head>
       
-      <main>
+      <main> 
         <header>
-          <div class="title">
+          <div className="title">
             <h1>僕の旅行記</h1>
           </div>
         </header>
         <div className="list">
           <ul>
-            <li>
-              <Button onClick={onOpen}>北海道</Button>
-                <Modal isOpen={isOpen} onClose={onClose}>
-                  <ModalOverlay />
-                  <ModalContent>
-                    <ModalHeader>北海道</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                      
-                      きれい
-                    </ModalBody>
-
-                    <ModalFooter>
-                      <Button colorScheme='blue' mr={3} onClick={onClose}>
-                        Close
-                      </Button>
-                      <Button variant='ghost'>Secondary Action</Button>
-                    </ModalFooter>
-                  </ModalContent>
-                </Modal>
-            </li>
-            <li>青森県</li>
-            <li>岩手県</li>
-            <li>宮城県</li>
-            <li>秋田県</li>
-            <li>山形県</li>
-            <li>福島県</li>
-            <li>茨城県</li>
-            <li>栃木県</li>
-            <li>群馬県</li>
-            <li>埼玉県</li>
-            <li>千葉県</li>
-            <li>東京都</li>
-            <li>神奈川県</li>
-            <li>新潟県</li>
-            <li>富山県</li>
-            <li>石川県</li>
-            <li>福井県</li>
-            <li>山梨県</li>
-            <li>長野県</li>
-            <li>岐阜県</li>
-            <li>静岡県</li>
-            <li>愛知県</li>
-            <li>三重県</li>
-            <li>滋賀県</li>
-            <li>京都府</li>
-            <li>大阪府</li>
-            <li>兵庫県</li>
-            <li>奈良県</li>
-            <li>和歌山県</li>
-            <li>鳥取県</li>
-            <li>島根県</li>
-            <li>岡山県</li>
-            <li>広島県</li>
-            <li>山口県</li>
-            <li>徳島県</li>
-            <li>香川県</li>
-            <li>愛媛県</li>
-            <li>高知県</li>
-            <li>福岡県</li>
-            <li>佐賀県</li>
-            <li>長崎県</li>
-            <li>熊本県</li>
-            <li>大分県</li>
-            <li>宮崎県</li>
-            <li>鹿児島県</li>
-            <li>沖縄県</li>
+            {areaList.map((area) => {
+              return (
+                <li>
+                  {area}
+                </li>
+              )
+            })}
           </ul>
         </div>
       </main>
@@ -135,10 +149,10 @@ export default function Home() {
         <div className="footer-list">
           <ul>
             <li>
-              <a href="https://twitter.com/suke3san2001">Twitter</a>
+            <a className="twitter" href="https://twitter.com/suke3san2001">Twitter</a>
             </li>
             <li>
-              <a href="https://www.instagram.com/tbs_ksp_3/">Instagram</a>
+              <a className="instagram" href="https://www.instagram.com/tbs_ksp_3/">Instagram</a>
             </li>
           </ul>
         </div>
@@ -149,12 +163,16 @@ export default function Home() {
       <style jsx>{`
         main {
           background-color: #faebd7;
-          padding-top: 5px;
+          padding-top: 50px;
           padding-bottom: 5px; 
         }
 
         header {
           height: 60px;
+        }
+
+        .title h1 {
+          font-family: Impact;
         }
 
         main ul {
@@ -164,6 +182,7 @@ export default function Home() {
           background: #f1f8ff;
           padding: 0.5em 0.5em 0.5em 2em;
           margin: 50px;
+          border-radius: 10px;
         }
         
         main ul li {
@@ -177,7 +196,7 @@ export default function Home() {
         }
 
         footer {
-          height: 100px;
+          height: 150px;
           background-color: #696969;
           font-size: 15px;
           padding: 5px 0;
@@ -187,7 +206,14 @@ export default function Home() {
           list-style: none;
           line-height: 1.5;
           padding-top: 10px;
+          padding-left: 20px;
+          font-family: Impact;
         }
+        
+        footer a {
+          padding: 2px;
+        }
+
       `}</style>
     </div>
   )
