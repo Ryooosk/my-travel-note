@@ -15,8 +15,7 @@ import {
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, getDocs, doc } from 'firebase/firestore';
-import { useEffect } from 'react/cjs/react.production.min';
+import { getFirestore, collection, getDocs, doc, query, where } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCAgG8T8_Bd0Z2ryyhPAsfxqVML25-vswc",
@@ -32,87 +31,62 @@ const app = initializeApp(firebaseConfig);
 const doAnalytics = () => getAnalytics(app);
 const db = getFirestore(app);
 
-//モーダル
-function BasicUsage() {
+const PhotoListModal = (props) => {
+
+  const { area } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [photoList, setPhotoList] = React.useState([]);
+
+  React.useEffect(() => {
+    (async () => {
+      const photoSnapshot = await getDocs(collection(db, "photos"));
+      const photosRef = collection(db, "photos");
+      const q = query(photosRef, where("name", "==", area));
+      const querySnapshot = await getDocs(q);
+      const photos = querySnapshot.docs.map((doc) => {
+        return doc.data();
+      });
+      //setState
+      setPhotoList(photos);
+    })();
+
+  }, []);
+    
+
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            aiueo
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant='ghost'>Secondary Action</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+    <Button className="title" onClick={onOpen}>{area}</Button>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>
+          <div>{area}</div>
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          {photoList.map((photo) => {
+            return (
+              <div>
+                <ul>
+                  <img src={photo.url}/>
+                  <li>{photo.desc}</li>
+                  <li>{photo.date}</li>
+                </ul>
+              </div>
+            )
+          })}
+        </ModalBody>
+      </ModalContent>
+    </Modal>  
     </>
   );
 }
 
-// const photoListModal = (props) => {
-//   const { isOpen, onOpen, onClose } = useDisclosure()
-//   const { area } = props;
-
-//   const [photoList, setPhotoList] = useState([]);
-  
-
-
-//   useEffect(async () => {
-
-//     const queryPhoto = async() => {
-//       await getDocs(collection(db, "photos"));
-//     };
-//     const set = queryPhoto.doc.map((area) => {
-//       return doc.data()
-//     });
-
-//     setPhotoList(set);
-    
-//     }, []);
-    
-
-//   return (
-//     <>
-//     <Button className="title" onClick={onOpen}>{area}</Button>
-//     <Modal isOpen={isOpen} onClose={onClose}>
-      
-//       <ModalOverlay />
-//       <ModalContent>
-//         <ModalHeader>
-          
-//         </ModalHeader>
-//         <ModalCloseButton />
-//         <ModalBody>
-          
-          
-//         </ModalBody>
-
-//         <ModalFooter>
-//           <Button colorScheme='blue' mr={3} onClick={onClose}>
-//             Close
-//           </Button>
-//         </ModalFooter>
-//       </ModalContent>
-//     </Modal>  
-//     </>
-//   );
-// }
-
 
 
 export default function Home() {
-  const areaList = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"];
+  const areaList = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"];
 
   React.useEffect(() => {
     doAnalytics();
@@ -137,7 +111,7 @@ export default function Home() {
             {areaList.map((area) => {
               return (
                 <li>
-                  {area}
+                  <PhotoListModal area = {area} />
                 </li>
               )
             })}
