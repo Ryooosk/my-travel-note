@@ -43,10 +43,10 @@ const ListComponent = (props) => {
   const areaKyuList = ["福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"];
 
   return (
-    <div>
+    <div className='container'>
       <details>
         <summary>北海道地方</summary>
-        <ul>
+        <ul className="area-list">
           {areaHoList.map((area) => {
             return (
               <li key = {area}>
@@ -60,7 +60,7 @@ const ListComponent = (props) => {
       </details>
       <details>
         <summary>東北地方</summary>
-        <ul>
+        <ul className="area-list">
           {areaToList.map((area) => {
             return (
               <li key = {area}>
@@ -74,7 +74,7 @@ const ListComponent = (props) => {
       </details>
       <details>
         <summary>関東地方</summary>
-        <ul>
+        <ul className="area-list">
           {areaKaList.map((area) => {
             return (
               <li key = {area}>
@@ -88,7 +88,7 @@ const ListComponent = (props) => {
       </details>
       <details>
         <summary>中部地方</summary>
-        <ul>
+        <ul className="area-list">
           {areaChubuList.map((area) => {
             return (
               <li key = {area}>
@@ -102,7 +102,7 @@ const ListComponent = (props) => {
       </details>
       <details>
         <summary>近畿地方</summary>
-        <ul>
+        <ul className="area-list">
           {areaKiList.map((area) => {
             return (
               <li key = {area}>
@@ -116,7 +116,7 @@ const ListComponent = (props) => {
       </details>
       <details>
         <summary>中国地方</summary>
-        <ul>
+        <ul className="area-list">
           {areaChugoList.map((area) => {
             return (
               <li key = {area}>
@@ -130,7 +130,7 @@ const ListComponent = (props) => {
       </details>
       <details>
         <summary>四国地方</summary>
-        <ul>
+        <ul className="area-list">
           {areaShiList.map((area) => {
             return (
               <li key = {area}>
@@ -144,7 +144,7 @@ const ListComponent = (props) => {
       </details>
       <details>
         <summary>九州地方</summary>
-        <ul>
+        <ul className="area-list">
           {areaKyuList.map((area) => {
             return (
               <li key = {area}>
@@ -156,12 +156,42 @@ const ListComponent = (props) => {
           })}
         </ul>
       </details>
-    </div>
+      
+      <style jsx>{`
+        ul {
+          list-style: none;
+        }
+      `}</style>
+    </div>   
   )
 }
 
-const DetailConponent = (props) => {
-  const { selectedArea }  = props;
+const ImageModalComponent = (props) => {
+  const { photo } = props;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  return (
+    <>
+      <img className="title" onClick={onOpen} src={photo.url}/>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>
+              <div>{photo.place}</div>
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <img src={photo.url}/>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+    </>
+  )
+}
+
+const DetailComponent = (props) => {
+  const { selectedArea } = props;
+
   const [photoList, setPhotoList] = React.useState([]);
 
   React.useEffect(() => {
@@ -171,109 +201,39 @@ const DetailConponent = (props) => {
       const q = query(photosRef, where("name", "==", selectedArea));
       const querySnapshot = await getDocs(q);
       const photos = querySnapshot.docs.map((doc) => {
-        return doc.data();
+        const photo = {
+          data: doc.data(),
+          id: doc.id
+        };
+        return photo;
       });
       //setState
       setPhotoList(photos);
     })();
-
-    console.log(selectedArea);
   }, [selectedArea]);
-
+  
   return (
     <div>
       {selectedArea}
-      {/* <ul>
-        <img src={photoList.url}/>
-        <li>{photoList.desc}</li>
-        <li>{photoList.date}</li>
-      </ul> */}
-    </div>
-  )
-}
-
-const PhotoListModal = (props) => {
-
-  const { area } = props;
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [photoList, setPhotoList] = React.useState([]);
-
-  React.useEffect(() => {
-    (async () => {
-      const photoSnapshot = await getDocs(collection(db, "photos"));
-      const photosRef = collection(db, "photos");
-      const q = query(photosRef, where("name", "==", area));
-      const querySnapshot = await getDocs(q);
-      const photos = querySnapshot.docs.map((doc) => {
-        return doc.data();
-      });
-      //setState
-      setPhotoList(photos);
-    })();
-  }, []);
-    
-
-  return (
-    <>
-    <Button className="title" onClick={onOpen}>{area}</Button>
-    <Modal isOpen={isOpen} onClose={onClose}>
-      
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>
-          <div>{area}</div>
-        </ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          {photoList.map((photo) => {
+      {photoList.map((photo) => {
+          
             return (
-              <div>
+              <div key={photo.id}>
                 <ul>
-                  <img src={photo.url}/>
-                  <li>{photo.desc}</li>
-                  <li>{photo.date}</li>
+                  <ImageModalComponent photo={photo.data}/>
+                  <li>{photo.data.place}</li>
+                  <li>{photo.data.desc}</li>
                 </ul>
               </div>
             )
           })}
-        </ModalBody>
-      </ModalContent>
-    </Modal>  
-    </>
-  );
-}
-
-const PrintPhotoList = (props) => {
-  const { area }  = props;
-  const [photoList, setPhotoList] = React.useState([]);
-
-  React.useEffect(() => {
-    (async () => {
-      const photoSnapshot = await getDocs(collection(db, "photos"));
-      const photosRef = collection(db, "photos");
-      const q = query(photosRef, where("name", "==", area));
-      const querySnapshot = await getDocs(q);
-      const photos = querySnapshot.docs.map((doc) => {
-        return doc.data();
-      });
-      //setState
-      setPhotoList(photos);
-    })();
-  }, []);
-
-  return (
-    <div>
-      {photoList.map((area) => {
-        return (
-          <ul>
-            <img src={photo.url}/>
-            <li>{photo.desc}</li>
-            <li>{photo.date}</li>
-          </ul>
-        );
-      })}
+      <style jsx>{`
+        ul {
+          list-style: none;
+        }
+      `}</style>
     </div>
-  );
+  )
 }
 
 export default function Home() {
@@ -306,7 +266,7 @@ export default function Home() {
             </div>
           </div>
           <div className='main-container'>
-            <DetailConponent selectedArea = {selectedArea} />
+            <DetailComponent selectedArea = {selectedArea} />
           </div>
         </div>
       </main>
@@ -367,7 +327,7 @@ export default function Home() {
         .list-container {
           order:1;
           width: 250px;
-
+          
 
           color: #668ad8;
           border: dashed 2px #668ad8;
@@ -375,10 +335,6 @@ export default function Home() {
           padding: 0.5em 0.5em 0.5em 2em;
           margin: 50px;
           border-radius: 10px;
-        }        
-
-        main ul li {
-         // padding: 0.5em 0;
         }
 
         header h1{
