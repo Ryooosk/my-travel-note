@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <div className="body">
       <Head>
-        <title>My Travel Notes</title>
+        <title>My Travel Note</title>
         <link rel="icon" href="/favicon.ico"/>
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
