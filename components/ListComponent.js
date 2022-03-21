@@ -206,7 +206,7 @@ const ListComponent = (props) => {
             margin: 0;
           }
 
-          @media (max-width: 840px ) {
+          @media (max-width: 740px ) {
             details {
               width: 25%;
             }

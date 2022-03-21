@@ -92,7 +92,7 @@ const DetailComponent = (props) => {
         }
 
         .place {
-          border-bottom: solid 2px black;
+          text-decoration: underline;
           display: block;
           margin: 10px;
           position: absolute;
@@ -100,7 +100,7 @@ const DetailComponent = (props) => {
           bottom: 0;
         }
 
-        @media (max-width: 840px ) {
+        @media (max-width: 740px ) {
           .content {
             display:block;
           }
