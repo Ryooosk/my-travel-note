@@ -57,7 +57,7 @@ const DetailComponent = (props) => {
                   <div className='desc'>
                     <p>{photo.data.desc}</p>
                   </div>
-                  <div className='place'>場所：{photo.data.place}</div> 
+                  <div className='place'>場所：{photo.data.place}</div>
                 </div>
             </div>
           )
@@ -102,19 +102,18 @@ const DetailComponent = (props) => {
 
         @media (max-width: 740px ) {
           .contents {
-            width: 80%;
-            margin: 0 auto;
+            width: 100%;
+            // margin: 0 auto;
           }
 
           .content {
             display:block;
-            margin: 0 auto;
             padding: 0;
           }
 
           .text {
-            margin: 20px auto 20px auto;
-            width: 100%;
+            margin: 20px auto;
+            width: 80%;
             height: 130px;
           }
         }

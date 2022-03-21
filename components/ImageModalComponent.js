@@ -49,7 +49,8 @@ const ImageModalComponent = (props) => {
 
         @media (max-width: 740px ) {
           .main-img {
-            margin: 0 auto;
+            margin: 20px auto 0 auto;
+            width: 80%;
           }
         }
         `}</style>
