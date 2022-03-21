@@ -101,6 +101,11 @@ const DetailComponent = (props) => {
         }
 
         @media (max-width: 740px ) {
+          .contents {
+            width: 80%;
+            margin: 0 auto;
+          }
+
           .content {
             display:block;
             margin: 0 auto;
@@ -108,9 +113,9 @@ const DetailComponent = (props) => {
           }
 
           .text {
-            width: 80%;
             margin: 20px auto 20px auto;
-
+            width: 100%;
+            height: 130px;
           }
         }
       `}</style>
