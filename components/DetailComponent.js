@@ -41,7 +41,7 @@ const DetailComponent = (props) => {
 
   if (loading) {
     return (
-      <>
+      <div className='main'>
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com"/>
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -66,7 +66,7 @@ const DetailComponent = (props) => {
             font-family: 'Noto Sans JP', sans-serif;
           }
         `}</style>
-      </>
+      </div>
     )
   }
   
