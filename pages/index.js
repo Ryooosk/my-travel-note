@@ -87,12 +87,11 @@ export default function Home() {
           width: 50%;
           border-right: solid 2px #f5f5f5;
           border-left: solid 2px #f5f5f5;
-          margin: 0 0 5% 5%;
         }
 
         .list-container {
           width: 10%;
-          margin: 20px 0 5% 10%;
+          margin: 20px 5% 5% 10%;
         }
 
         footer {
@@ -125,7 +124,7 @@ export default function Home() {
           .main-container {
             width: 80%;
             margin: 0 auto;
-            padding-bottom: 20px;
+            // padding-bottom: 20px;
           }
         }
       `}</style>

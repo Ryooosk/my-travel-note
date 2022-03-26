@@ -18,11 +18,12 @@ const db = getFirestore(app);
 
 const DetailComponent = (props) => {
   const { selectedArea } = props;
-
   const [photoList, setPhotoList] = React.useState([]);
+  const [loading, setLoading] = React.useState([false]);
 
   React.useEffect(() => {
     (async () => {
+      setLoading(true);
       const photosRef = collection(db, "photos");
       const q = query(photosRef, where("name", "==", selectedArea));
       const querySnapshot = await getDocs(q);
@@ -33,10 +34,41 @@ const DetailComponent = (props) => {
         };
         return photo;
       });
-      //setState
       setPhotoList(photos);
+      setLoading(false);
     })();
   }, [selectedArea]);
+
+  if (loading) {
+    return (
+      <>
+        <head>
+          <link rel="preconnect" href="https://fonts.googleapis.com"/>
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+          <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Sans+JP&display=swap" rel="stylesheet"/>
+        </head>
+
+        <div className='loader-wrap'>
+          <div className='loader'>読み込み中</div>
+        </div>
+
+        <style jsx>{`
+          .loader-wrap {
+            padding: 5% 0;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 10px;
+            font-size: 30px;
+            font-weight: 1000;
+            font-family: 'Noto Sans JP', sans-serif;
+          }
+        `}</style>
+      </>
+    )
+  }
   
   return (
     <div className='main'>
@@ -48,23 +80,42 @@ const DetailComponent = (props) => {
 
       <div className='area-name'>{selectedArea}</div>
 
-      <div className='contents'>
-        {photoList.map((photo) => {        
-          return (
-            <div className="content" key={photo.id}>      
+      {photoList.length === 0 
+        ? <div className='nodata'>
+            <div>まだ行ってません💦</div>
+          </div>
+        : <div className='contents'>
+            {photoList.map((photo) => {        
+              return (
+                <div className="content" key={photo.id}>
                 <ImageModalComponent photo={photo.data}/>
                 <div className='text'>
                   <div className='desc'>
                     <p>{photo.data.desc}</p>
                   </div>
-                  <div className='place'>場所：{photo.data.place}</div>
+                  <div className='place'>
+                    場所：{photo.data.place}
+                  </div>
                 </div>
-            </div>
-          )
-        })}
-      </div>
+              </div>
+              )
+            })}
+          </div>
+      }
+      
 
       <style jsx>{`
+        .nodata {
+          padding: 5% 0;
+          display: flex;
+          width: 100%;
+          height: 100%;
+          align-items: center;
+          justify-content: center;
+          font-size: 20px;
+          font-weight: 1000;
+        }
+
         .main {
           font-family: 'Noto Sans JP', sans-serif;
           padding-top: 20px;
