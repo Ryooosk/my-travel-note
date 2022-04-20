@@ -38,7 +38,7 @@ export default function Home() {
 
       <header>
         <div className="title">
-          <h1>僕の旅行記 {process.env.DB_HOST}</h1>
+          <h1>僕の旅行記</h1>
         </div>
       </header>
       
