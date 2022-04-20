@@ -7,7 +7,7 @@ import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
-  authDomain: "project-photo-f1ae2.firebaseapp.com",
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
   projectId: "project-photo-f1ae2",
   storageBucket: "project-photo-f1ae2.appspot.com",
   messagingSenderId: "903517776237",
