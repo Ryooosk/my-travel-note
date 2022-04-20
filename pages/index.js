@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCAgG8T8_Bd0Z2ryyhPAsfxqVML25-vswc",
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
   authDomain: "project-photo-f1ae2.firebaseapp.com",
   projectId: "project-photo-f1ae2",
   storageBucket: "project-photo-f1ae2.appspot.com",
@@ -38,7 +38,7 @@ export default function Home() {
 
       <header>
         <div className="title">
-          <h1>僕の旅行記</h1>
+          <h1>僕の旅行記 {process.env.DB_HOST}</h1>
         </div>
       </header>
       
