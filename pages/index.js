@@ -8,11 +8,11 @@ import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-  projectId: "project-photo-f1ae2",
-  storageBucket: "project-photo-f1ae2.appspot.com",
-  messagingSenderId: "903517776237",
-  appId: "1:903517776237:web:9e460787a0c8816e72d264",
-  measurementId: "G-WQKLWNZ32S"
+  projectId: process.env.NEXT_PUBLIC_PROLECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_ADD_ID,
+  measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
